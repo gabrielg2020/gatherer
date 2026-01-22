@@ -1,0 +1,26 @@
+name: Python Lint
+
+on:
+  workflow_call:
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Run lint
+        uses: advanced-security/python-lint-code-scanning-action@v1
+        with:
+          linter: flake8
+
